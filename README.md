@@ -1,33 +1,26 @@
-# LOAP Controlador-Modelo
+# rest_api
+Esta es la rest api que use en la ayudantía
 
-1. [Integrantes](#integrant)
-2. [Ejecución](#comand)
-3. [Consideraciones](#consider)
-4. [Correos](#contact)
 
-<a name="integrant"></a>
-## 1. Integrantes:
-- Rodrigo Cayazaya
-- Lucio Fondon
-- Francisco Reyes
+Los requisitos son:
 
-<a name="comand"></a>
-## 2. Ejecución:
-- Abrir carpeta "demo"
-- Compilar: `mvn install`
-- Ejecutar: `mvn spring-boot:run`
+- JDK 1.8
+- Maven 
+- PostgreSQL
 
-<a name="consider"></a>
-## 3. Consideraciones:
-- Se esta ejecutando en el puerto `8000`.
-- Dentro de trabajo/demo/src/main/resources/application.properties se deben colocar la conexión a la bd.
-Consideraciones del chat:
-- Si los mensajes no se pueden ver, volver al inicio y entrar denuevo al chat.
-- Los mensajes se encuentran desordenados.
-- Puede que el primer mensaje salga con el nombre "Test".
+Se corre con:
 
-<a name="contact"></a>
-## 4. Correos:
-- Rodrigo Cayazaya: rodrigo.cayazaya@sansano.usm.cl
-- Lucio Fondon: lucio.fondon@sansano.usm.cl
-- Francisco Reyes: francisco.reyesja@sansano.usm.cl
+```
+mvn spring-boot:run
+```
+en consola
+
+
+Recuerden cambiar el  application.properties con los datos de su BD
+
+```
+#data conection
+spring.datasource.url=jdbc:postgresql://localhost:5432/asdf
+spring.datasource.username=postgres
+spring.datasource.password=1234
+```
