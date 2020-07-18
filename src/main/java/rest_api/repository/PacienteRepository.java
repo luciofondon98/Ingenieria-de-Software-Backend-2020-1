@@ -8,17 +8,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.io.Serializable;
 
-import rest_api.entity.Medico;
+import rest_api.entity.Paciente;
 //esto implementa las operaciones CRUD para ser usadas
-@Repository("RepositoryMedico")
-public interface MedicoRepository extends JpaRepository<Medico, Serializable>,
-    PagingAndSortingRepository<Medico, Serializable>
+@Repository("RepositoryPaciente")
+public interface PacienteRepository extends JpaRepository<Paciente, Serializable>,
+    PagingAndSortingRepository<Paciente, Serializable>
 {
-    public abstract Medico findById(long id);
+    public abstract Paciente findById(long id);
 
-    public abstract List<Medico> findAll();
+    public abstract List<Paciente> findAll();
     
-    public abstract List<Medico> findByEstado(String estado);
+    public abstract List<Paciente> findByEstado(String estado);
     
     public abstract void deleteById(long id);
 }

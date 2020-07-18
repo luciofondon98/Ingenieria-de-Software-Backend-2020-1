@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import javax.validation.Valid;
 
 
-import rest_api.entity.Medico;
-import rest_api.model.MMedico;
-import rest_api.service.MedicoService;
+import rest_api.entity.Paciente;
+import rest_api.model.MPaciente;
+import rest_api.service.PacienteService;
 
 import java.util.List;
 
@@ -23,58 +23,58 @@ import java.util.List;
 //esto mapea la app en requests URL->HTTP
 @RestController
 //localhost:puerto/api/medicos
-@RequestMapping("/api/medicos")
-public class MedicoController
+@RequestMapping("/api/pacientes") //quizás cambiar "/api/pacientes" por "ISW/pacientes"
+public class PacienteController
 {
     @Autowired
-    @Qualifier("ServicioMedico")
-    MedicoService service;
+    @Qualifier("ServicioPaciente")
+    PacienteService service;
 
     // post 1 medico, requiere un body json equivalente a la clase Medico
     // Post localhost:puerto/api/medicos
     @PostMapping("")
-    public ResponseEntity<Medico> addMedico (@RequestBody Medico medico)
+    public ResponseEntity<Paciente> addPaciente (@RequestBody Paciente paciente)
     {
 
-        System.out.println(medico.getNombre());
-        Medico med = service.saveOrUpdateMedico(medico);
-        return new ResponseEntity<Medico>(med, HttpStatus.CREATED);
+        System.out.println(paciente.getNombre());
+        Paciente med = service.saveOrUpdatePaciente(paciente);
+        return new ResponseEntity<Paciente>(med, HttpStatus.CREATED);
     }
     // get all medicos
     //Get localhost:puerto/api/medicos
     @GetMapping("/test")
-    public List<MMedico> getMedicos()
+    public List<MPaciente> getPacientes()
     {
         return service.listAll();
     }
     // get 1 medico by id, el parametro esta en la URL
     //GET localhost:puerto/api/medicos/id
     @GetMapping("/{id}")
-    public MMedico getMedicoById(@PathVariable("id") Long id)
+    public MPaciente getPacienteById(@PathVariable("id") Long id)
     {
         return service.listOne(id);
     }
     // get medicos que tengan el estado definido, este es un parametro de la request
     @GetMapping("/filter")
-    public List<MMedico> getMedicosByEstado(@RequestParam(value="estado") String estado)
+    public List<MPaciente> getPacientesByEstado(@RequestParam(value="estado") String estado)
     {
         return service.listByEstado(estado);
     }
     // update 1 medico, sobre su id
     @PutMapping("/{id}")
-    public Medico updateMedico(@PathVariable Long id, @RequestBody MMedico medico) 
+    public Paciente updatePaciente(@PathVariable Long id, @RequestBody MPaciente paciente) 
     {
-        MMedico med = service.listOne(id); 
-        Medico newmed = service.convert(med);
+        MPaciente med = service.listOne(id); 
+        Paciente newmed = service.convert(med);
         newmed.setId(id);
-        return service.saveOrUpdateMedico(newmed);
+        return service.saveOrUpdatePaciente(newmed);
     }
     // delete 1 medico, sobre su id
     @DeleteMapping("/{id}") 
-    public ResponseEntity<String> deleteMedico(@PathVariable Long id)
+    public ResponseEntity<String> deletePaciente(@PathVariable Long id)
     {
         try{
-            service.deleteMedico(id);
+            service.deletePaciente(id);
             return new ResponseEntity<>(
             "Se borro con exito", 
             HttpStatus.BAD_REQUEST);

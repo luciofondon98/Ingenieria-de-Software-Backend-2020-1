@@ -1,37 +1,39 @@
-package rest_api.model;
+package rest_api.entity;
 
-import rest_api.entity.Medico;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
-
 
 
 //basicamente una tabla de la BD 
 
-
-public class MMedico implements Serializable{
+@Entity
+@Table(name = "paciente")
+public class Paciente implements Serializable {
     
-    public MMedico()
+    public Paciente()
     {
 
     }
-    public MMedico(Medico Medico){
-        this.id = Medico.getId();
-        this.nombre = Medico.getNombre();
-        this.cargo = Medico.getCargo();
-        this.estado = Medico.getEstado();
-    }
-    public MMedico(Long id,String nombre, String cargo, String estado){
-        this.id = id;
+    public Paciente(String nombre, String cargo, String estado){
         this.nombre = nombre;
         this.cargo = cargo;
         this.estado = estado;
     }
     
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "cargo")
     private String cargo;
+    @Column(name = "estado")
     private String estado;
 
 

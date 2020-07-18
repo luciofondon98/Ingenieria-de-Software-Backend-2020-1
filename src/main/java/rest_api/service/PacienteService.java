@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
-import rest_api.repository.MedicoRepository;
-import rest_api.entity.Medico;
-import rest_api.model.MMedico;
-import rest_api.converter.ConvertidorMedico;
+import rest_api.repository.PacienteRepository;
+import rest_api.entity.Paciente;
+import rest_api.model.MPaciente;
+import rest_api.converter.ConvertidorPaciente;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,41 +16,41 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 //esto define que operaciones de las definidas seran usadas 
-@Service("ServicioMedico")
-public class MedicoService 
+@Service("ServicioPaciente")
+public class PacienteService 
 {
     @Autowired
-    @Qualifier("RepositoryMedico")
-    private MedicoRepository repositorio;
+    @Qualifier("RepositoryPaciente")
+    private PacienteRepository repositorio;
 
     @Autowired
-    @Qualifier("ConMedico")
-    private ConvertidorMedico convertidor;
+    @Qualifier("ConPaciente")
+    private ConvertidorPaciente convertidor;
 
     // request
-    public List<MMedico> listAll() {
+    public List<MPaciente> listAll() {
         return convertidor.convertirLista(repositorio.findAll());
     }
 
-    public MMedico listOne(Long id) {
+    public MPaciente listOne(Long id) {
         return convertidor.convertir(repositorio.findById(id));
     }
-    public List<MMedico> listByEstado(String estado)
+    public List<MPaciente> listByEstado(String estado)
     {
         return convertidor.convertirLista(repositorio.findByEstado(estado));
     }
     //create & update
-    public Medico saveOrUpdateMedico(Medico medico)
+    public Paciente saveOrUpdatePaciente(Paciente paciente)
     {
-        return repositorio.save(medico);
+        return repositorio.save(paciente);
     }
-    public Medico convert(MMedico medico){
-        return convertidor.convertirmtoe(medico);
+    public Paciente convert(MPaciente paciente){
+        return convertidor.convertirmtoe(paciente);
     }
 
     //delete
     @Transactional
-    public void deleteMedico(Long id)
+    public void deletePaciente(Long id)
     {
         repositorio.deleteById(id);
     }
