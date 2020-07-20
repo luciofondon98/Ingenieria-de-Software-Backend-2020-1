@@ -23,7 +23,7 @@ import java.util.List;
 //esto mapea la app en requests URL->HTTP
 @RestController
 //localhost:puerto/api/medicos
-@RequestMapping("/api/pacientes") //quizás cambiar "/api/pacientes" por "ISW/pacientes"
+@RequestMapping("/api/pacientes")
 public class PacienteController
 {
     @Autowired
@@ -35,18 +35,21 @@ public class PacienteController
     @PostMapping("")
     public ResponseEntity<Paciente> addPaciente (@RequestBody Paciente paciente)
     {
-
         System.out.println(paciente.getNombre());
-        Paciente med = service.saveOrUpdatePaciente(paciente);
-        return new ResponseEntity<Paciente>(med, HttpStatus.CREATED);
+        Paciente pac = service.saveOrUpdatePaciente(paciente);
+        return new ResponseEntity<Paciente>(pac, HttpStatus.CREATED);
     }
+    
+    
     // get all medicos
     //Get localhost:puerto/api/medicos
-    @GetMapping("/test")
+    @GetMapping("/getAll")
     public List<MPaciente> getPacientes()
     {
         return service.listAll();
     }
+
+
     // get 1 medico by id, el parametro esta en la URL
     //GET localhost:puerto/api/medicos/id
     @GetMapping("/{id}")
@@ -54,21 +57,27 @@ public class PacienteController
     {
         return service.listOne(id);
     }
+
+    
     // get medicos que tengan el estado definido, este es un parametro de la request
-    @GetMapping("/filter")
-    public List<MPaciente> getPacientesByEstado(@RequestParam(value="estado") String estado)
+    @GetMapping("/diagnostico")
+    public List<MPaciente> getPacientesByDiagnostico(@RequestParam(value="diagnostico") String diagnostico)
     {
-        return service.listByEstado(estado);
+        return service.listByDiagnostico(diagnostico);
     }
+
+    
     // update 1 medico, sobre su id
     @PutMapping("/{id}")
     public Paciente updatePaciente(@PathVariable Long id, @RequestBody MPaciente paciente) 
     {
-        MPaciente med = service.listOne(id); 
-        Paciente newmed = service.convert(med);
-        newmed.setId(id);
-        return service.saveOrUpdatePaciente(newmed);
+        MPaciente pac = service.listOne(id); 
+        Paciente newpac = service.convert(pac);
+        newpac.setId(id);
+        return service.saveOrUpdatePaciente(newpac);
     }
+
+    
     // delete 1 medico, sobre su id
     @DeleteMapping("/{id}") 
     public ResponseEntity<String> deletePaciente(@PathVariable Long id)

@@ -22,7 +22,7 @@ public class ConvertidorPaciente {
         return mpaciente;
     }
     public Paciente convertirmtoe(MPaciente paciente){
-        Paciente epaciente = new Paciente(paciente.getNombre(),paciente.getCargo(),paciente.getEstado());
+        Paciente epaciente = new Paciente(paciente.getNombre(),paciente.getPrograma_de_salud(),paciente.getDiagnostico(),paciente.getEntrada(),paciente.getSalida(),paciente.getAntecedente(),paciente.getPrioridad(),paciente.getComentario());
         return epaciente;
     }
 }

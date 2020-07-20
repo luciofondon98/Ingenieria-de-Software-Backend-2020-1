@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
+
+import javax.tools.Diagnostic;
+
 import rest_api.repository.PacienteRepository;
 import rest_api.entity.Paciente;
 import rest_api.model.MPaciente;
@@ -35,9 +38,9 @@ public class PacienteService
     public MPaciente listOne(Long id) {
         return convertidor.convertir(repositorio.findById(id));
     }
-    public List<MPaciente> listByEstado(String estado)
+    public List<MPaciente> listByDiagnostico(String diagnostico)
     {
-        return convertidor.convertirLista(repositorio.findByEstado(estado));
+        return convertidor.convertirLista(repositorio.findByDiagnostico(diagnostico));
     }
     //create & update
     public Paciente saveOrUpdatePaciente(Paciente paciente)

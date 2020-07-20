@@ -4,6 +4,8 @@ import rest_api.entity.Paciente;
 
 import java.io.Serializable;
 
+import java.sql.Date;
+
 //basicamente una tabla de la BD 
 
 public class MPaciente implements Serializable{
@@ -15,23 +17,39 @@ public class MPaciente implements Serializable{
     public MPaciente(Paciente Paciente){
         this.id = Paciente.getId();
         this.nombre = Paciente.getNombre();
-        this.cargo = Paciente.getCargo();
-        this.estado = Paciente.getEstado();
+        this.programa_de_salud = Paciente.getPrograma_de_salud();
+        this.diagnostico = Paciente.getDiagnostico();
+        this.entrada = Paciente.getEntrada();
+        this.salida = Paciente.getSalida();
+        this.antecedente = Paciente.getAntecedente();
+        this.prioridad = Paciente.getPrioridad();
+        this.comentario = Paciente.getComentario();
     }
-    public MPaciente(Long id,String nombre, String cargo, String estado){
+    public MPaciente(Long id,String nombre, String programa_de_salud, String diagnostico, Date entrada, Date salida, String antecedente, int prioridad, String comentario){
         this.id = id;
         this.nombre = nombre;
-        this.cargo = cargo;
-        this.estado = estado;
+        this.programa_de_salud = programa_de_salud;
+        this.diagnostico = diagnostico;
+        this.entrada = entrada;
+        this.salida = salida;
+        this.antecedente = antecedente;
+        this.prioridad = prioridad;
+        this.comentario = comentario;
     }
     
 
     private Long id;
     private String nombre;
-    private String cargo;
-    private String estado;
+    private String programa_de_salud;
+    private String diagnostico;
+    private Date entrada;
+    private Date salida;
+    private String antecedente;
+    private int prioridad;
+    private String comentario;
 
 
+    //Getters
     public Long getId()
     {
         return id;
@@ -42,17 +60,42 @@ public class MPaciente implements Serializable{
         return nombre;
     }
 
-    public String getCargo()
+    public String getPrograma_de_salud()
     {
-        return cargo;
+        return programa_de_salud;
     }
 
-    public String getEstado()
+    public String getDiagnostico()
     {
-        return estado;
+        return diagnostico;
     }
 
+    public Date getEntrada()
+    {
+        return entrada;
+    }
 
+    public Date getSalida()
+    {
+        return salida;
+    }
+
+    public String getAntecedente()
+    {
+        return antecedente;
+    }
+
+    public int getPrioridad()
+    {
+        return prioridad;
+    }
+
+    public String getComentario()
+    {
+        return comentario;
+    }
+
+    //Setters
     public void setId(Long id)
     {
         this.id = id;
@@ -62,16 +105,38 @@ public class MPaciente implements Serializable{
     {
         this.nombre = nombre;
     }
-    public void setCargo(String cargo)
+    public void setPrograma_de_salud(String programa_de_salud)
     {
-        this.cargo = cargo;
+        this.programa_de_salud = programa_de_salud;
     }
-    
-    public void setEstado(String estado)
+
+    public void setDiagnostico(String diagnostico)
     {
-        this.estado = estado;
+        this.diagnostico = diagnostico;
     }    
-    
 
+    public void setEntrada(Date entrada)
+    {
+        this.entrada = entrada;
+    }
 
+    public void setSalida(Date salida)
+    {
+        this.salida = salida;
+    }
+
+    public void setAntecedente(String antecedente)
+    {
+        this.antecedente = antecedente;
+    }
+
+    public void setPrioridad(int prioridad)
+    {
+        this.prioridad = prioridad;
+    }
+
+    public void setComentario(String comentario)
+    {
+        this.comentario = comentario;
+    }
 }
