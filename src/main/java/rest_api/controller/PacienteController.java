@@ -28,17 +28,17 @@ public class PacienteController{
     PacienteService service;
 
 
-    @PostMapping("/paciente")
+    @PostMapping("/paciente") // localhost:8000/api/pacientes/paciente
     public boolean agregarCliente(@RequestBody @Valid Paciente paciente){
         return service.crear(paciente);
     }
 
-    @GetMapping("/paciente/{id}")
-    public Paciente obtenerPaciente(@RequestParam(name="id") long id){
+    @GetMapping("/paciente/{id}") // localhost:8000/api/pacientes/paciente/id
+    public Paciente obtenerPaciente(@PathVariable("id") long id){
         return service.obtenerporId(id);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAll") // localhost:8000/api/pacientes/getAll
     public List<Paciente> getAllPacientes(){
         return service.getAll();
     }
