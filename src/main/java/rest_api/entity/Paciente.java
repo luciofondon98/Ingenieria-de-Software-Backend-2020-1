@@ -7,7 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.sql.Date; //quizas sirve
+import java.sql.Timestamp;
+import java.sql.Date;
+
 
 
 //basicamente una tabla de la BD 
@@ -20,8 +22,11 @@ public class Paciente implements Serializable {
     {
 
     }
-    public Paciente(String nombre, String programa_de_salud, String diagnostico, Date entrada, Date salida, String antecedente, int prioridad, String comentario){
+    public Paciente(Long id,String nombre, Date fecha_de_nacimiento, Timestamp fecha_de_defuncion, String rut, String programa_de_salud, String diagnostico, Timestamp entrada, Timestamp salida, String antecedente, int prioridad, String comentario){
         this.nombre = nombre;
+        this.fecha_de_nacimiento = fecha_de_nacimiento;
+        this.fecha_de_defuncion = fecha_de_defuncion;
+        this.rut = rut;
         this.programa_de_salud = programa_de_salud;
         this.diagnostico = diagnostico;
         this.entrada = entrada;
@@ -38,22 +43,28 @@ public class Paciente implements Serializable {
 
     @Column(name = "nombre")
     private String nombre;
+    @Column(name = "fecha_de_nacimiento")
+    private Date fecha_de_nacimiento;
+    @Column(name = "fecha_de_defuncion")
+    private Timestamp fecha_de_defuncion;
+    @Column(name = "rut")
+    private String rut;
     @Column(name = "programa_de_salud")
     private String programa_de_salud;
     @Column(name = "diagnostico")
     private String diagnostico;
-    @Column(name = "entrada")
-    private Date entrada;
+    @Column(name = "entrada") 
+    private Timestamp entrada;
     @Column(name = "salida")
-    private Date salida;
-    @Column(name = "antecedente")
+    private Timestamp salida;
+    @Column(name = "antecedente")   
     private String antecedente;
     @Column(name = "prioridad")
     private int prioridad;
     @Column(name = "comentario")
     private String comentario;
-
-    //Getters
+    
+      //Getters
     public Long getId()
     {
         return id;
@@ -62,6 +73,21 @@ public class Paciente implements Serializable {
     public String getNombre()
     {
         return nombre;
+    }
+
+    public Date getFecha_de_nacimiento()
+    {
+        return fecha_de_nacimiento;
+    }
+
+    public Timestamp getFecha_de_defuncion()
+    {
+        return fecha_de_defuncion;
+    }
+
+    public String getRut()
+    {
+        return rut;
     }
 
     public String getPrograma_de_salud()
@@ -73,13 +99,13 @@ public class Paciente implements Serializable {
     {
         return diagnostico;
     }
-    
-    public Date getEntrada()
+
+    public Timestamp getEntrada()
     {
         return entrada;
     }
 
-    public Date getSalida()
+    public Timestamp getSalida()
     {
         return salida;
     }
@@ -109,22 +135,38 @@ public class Paciente implements Serializable {
     {
         this.nombre = nombre;
     }
+
+    public void setFecha_de_nacimiento(Date fecha_de_nacimiento)
+    {
+        this.fecha_de_nacimiento = fecha_de_nacimiento;
+    }
+
+    public void setFecha_de_defuncion(Timestamp fecha_de_defuncion)
+    {
+        this.fecha_de_defuncion = fecha_de_defuncion;
+    }
+
+    public void setRut(String rut)
+    {
+        this.rut = rut;
+    }
+
     public void setPrograma_de_salud(String programa_de_salud)
     {
         this.programa_de_salud = programa_de_salud;
     }
-    
+
     public void setDiagnostico(String diagnostico)
     {
         this.diagnostico = diagnostico;
     }    
-    
-    public void setEntrada(Date entrada)
+
+    public void setEntrada(Timestamp entrada)
     {
         this.entrada = entrada;
     }
-    
-    public void setSalida(Date salida)
+
+    public void setSalida(Timestamp salida)
     {
         this.salida = salida;
     }
