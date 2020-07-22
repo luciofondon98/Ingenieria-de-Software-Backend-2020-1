@@ -3,26 +3,55 @@ package rest_api.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.sql.Date;
 
-
+import org.hibernate.annotations.GenericGenerator;
 
 //basicamente una tabla de la BD 
 
 @Entity
 @Table(name = "paciente")
-public class Paciente implements Serializable {
+public class Paciente{
+
+     //Atributos
+     @Id
+     @GenericGenerator(name="incrementpaciente", strategy="increment")
+     @GeneratedValue(generator="incrementpaciente")
+     @Column(name="id")
+     private Long id;
+ 
+     @Column(name = "nombre")
+     private String nombre;
+     @Column(name = "fecha_de_nacimiento")
+     private Date fecha_de_nacimiento;
+     @Column(name = "fecha_de_defuncion")
+     private Timestamp fecha_de_defuncion;
+     @Column(name = "rut")
+     private String rut;
+     @Column(name = "programa_de_salud")
+     private String programa_de_salud;
+     @Column(name = "diagnostico")
+     private String diagnostico;
+     @Column(name = "entrada") 
+     private Timestamp entrada;
+     @Column(name = "salida")
+     private Timestamp salida;
+     @Column(name = "antecedente")   
+     private String antecedente;
+     @Column(name = "prioridad")
+     private int prioridad;
+     @Column(name = "comentario")
+     private String comentario;
+     
     
     public Paciente()
     {
 
     }
-    public Paciente(Long id,String nombre, Date fecha_de_nacimiento, Timestamp fecha_de_defuncion, String rut, String programa_de_salud, String diagnostico, Timestamp entrada, Timestamp salida, String antecedente, int prioridad, String comentario){
+    public Paciente(long id, String nombre, Date fecha_de_nacimiento, Timestamp fecha_de_defuncion, String rut, String programa_de_salud, String diagnostico, Timestamp entrada, Timestamp salida, String antecedente, int prioridad, String comentario){
         this.nombre = nombre;
         this.fecha_de_nacimiento = fecha_de_nacimiento;
         this.fecha_de_defuncion = fecha_de_defuncion;
@@ -36,34 +65,7 @@ public class Paciente implements Serializable {
         this.comentario = comentario;
     }
 
-    //Atributos
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(name = "nombre")
-    private String nombre;
-    @Column(name = "fecha_de_nacimiento")
-    private Date fecha_de_nacimiento;
-    @Column(name = "fecha_de_defuncion")
-    private Timestamp fecha_de_defuncion;
-    @Column(name = "rut")
-    private String rut;
-    @Column(name = "programa_de_salud")
-    private String programa_de_salud;
-    @Column(name = "diagnostico")
-    private String diagnostico;
-    @Column(name = "entrada") 
-    private Timestamp entrada;
-    @Column(name = "salida")
-    private Timestamp salida;
-    @Column(name = "antecedente")   
-    private String antecedente;
-    @Column(name = "prioridad")
-    private int prioridad;
-    @Column(name = "comentario")
-    private String comentario;
-    
+   
       //Getters
     public Long getId()
     {

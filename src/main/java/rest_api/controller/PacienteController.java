@@ -1,94 +1,55 @@
 package rest_api.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import javax.validation.Valid;
-
-
-import rest_api.entity.Paciente;
-import rest_api.model.MPaciente;
-import rest_api.service.PacienteService;
-
 import java.util.List;
 
-@CrossOrigin(origins = "*")
-//esto mapea la app en requests URL->HTTP
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import rest_api.entity.Paciente;
+import rest_api.service.PacienteService;
+
+
 @RestController
-//localhost:puerto/api/medicos
 @RequestMapping("/api/pacientes")
-public class PacienteController
-{
+public class PacienteController{
     @Autowired
     @Qualifier("ServicioPaciente")
     PacienteService service;
 
-    // post 1 medico, requiere un body json equivalente a la clase Medico
-    // Post localhost:puerto/api/medicos
-    @PostMapping("")
-    public ResponseEntity<Paciente> addPaciente (@RequestBody Paciente paciente)
-    {
-        System.out.println(paciente.getNombre());
-        Paciente pac = service.saveOrUpdatePaciente(paciente);
-        return new ResponseEntity<Paciente>(pac, HttpStatus.CREATED);
+
+    @PostMapping("/paciente")
+    public boolean agregarCliente(@RequestBody @Valid Paciente paciente){
+        return service.crear(paciente);
     }
-    
-    
-    // get all medicos
-    //Get localhost:puerto/api/medicos
+
+    @GetMapping("/paciente/{id}")
+    public Paciente obtenerPaciente(@RequestParam(name="id") long id){
+        return service.obtenerporId(id);
+    }
+
     @GetMapping("/getAll")
-    public List<MPaciente> getPacientes()
-    {
-        return service.listAll();
+    public List<Paciente> getAllPacientes(){
+        return service.getAll();
     }
 
-
-    // get 1 medico by id, el parametro esta en la URL
-    //GET localhost:puerto/api/medicos/id
-    @GetMapping("/{id}")
-    public MPaciente getPacienteById(@PathVariable("id") Long id)
-    {
-        return service.listOne(id);
-    }
-    
-    @GetMapping("/diagnostico")
-    public List<MPaciente> getPacientesByDiagnostico(@RequestParam(value="diagnostico") String diagnostico)
-    {
-        return service.listByDiagnostico(diagnostico);
+    @PutMapping("/paciente")
+    public boolean actualizarCliente(@RequestBody @Valid Paciente paciente){
+        return service.actualizar(paciente);
     }
 
-    
-    // update 1 medico, sobre su id
-    @PutMapping("/{id}")
-    public Paciente updatePaciente(@PathVariable Long id, @RequestBody MPaciente paciente) 
-    {
-        MPaciente pac = service.listOne(id); 
-        Paciente newpac = service.convert(pac);
-        newpac.setId(id);
-        return service.saveOrUpdatePaciente(newpac);
-    }
-
-    
-    // delete 1 medico, sobre su id
-    @DeleteMapping("/{id}") 
-    public ResponseEntity<String> deletePaciente(@PathVariable Long id)
-    {
-        try{
-            service.deletePaciente(id);
-            return new ResponseEntity<>(
-            "Se borro con exito", 
-            HttpStatus.BAD_REQUEST);
-        }catch(Exception e) {
-            return new ResponseEntity<>(
-            "Ocurrio un error", 
-            HttpStatus.BAD_REQUEST);
-        }
+    @DeleteMapping("/paciente/{id}")
+    public boolean borrarPaciente(@PathVariable("id") long id){
+        return service.borrar(id);
     }
 }

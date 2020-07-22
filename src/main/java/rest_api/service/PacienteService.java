@@ -1,61 +1,53 @@
 package rest_api.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Pageable;
 import java.util.List;
-
-import javax.tools.Diagnostic;
 
 import rest_api.repository.PacienteRepository;
 import rest_api.entity.Paciente;
-import rest_api.model.MPaciente;
-import rest_api.converter.ConvertidorPaciente;
 
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-
-
-
-//esto define que operaciones de las definidas seran usadas 
 @Service("ServicioPaciente")
-public class PacienteService 
-{
+public class PacienteService{
     @Autowired
     @Qualifier("RepositoryPaciente")
     private PacienteRepository repositorio;
 
-    @Autowired
-    @Qualifier("ConPaciente")
-    private ConvertidorPaciente convertidor;
-
-    // request
-    public List<MPaciente> listAll() {
-        return convertidor.convertirLista(repositorio.findAll());
+    public boolean crear(Paciente paciente){
+        try{
+            repositorio.save(paciente);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
-    public MPaciente listOne(Long id) {
-        return convertidor.convertir(repositorio.findById(id));
-    }
-    public List<MPaciente> listByDiagnostico(String diagnostico)
-    {
-        return convertidor.convertirLista(repositorio.findByDiagnostico(diagnostico));
-    }
-    //create & update
-    public Paciente saveOrUpdatePaciente(Paciente paciente)
-    {
-        return repositorio.save(paciente);
-    }
-    public Paciente convert(MPaciente paciente){
-        return convertidor.convertirmtoe(paciente);
+    public boolean actualizar(Paciente paciente){
+        try{
+            repositorio.save(paciente);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
-    //delete
-    @Transactional
-    public void deletePaciente(Long id)
-    {
-        repositorio.deleteById(id);
+    public boolean borrar(long id){
+        try{
+            Paciente paciente = repositorio.findById(id);
+            repositorio.delete(paciente);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
+    public Paciente obtenerporId(long id){
+        return repositorio.findById(id);
+    }
+
+    public List<Paciente> getAll(){
+        return repositorio.findAll();
+    }
 }
