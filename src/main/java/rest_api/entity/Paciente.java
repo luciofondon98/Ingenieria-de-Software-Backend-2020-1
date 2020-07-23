@@ -10,8 +10,6 @@ import java.sql.Date;
 
 import org.hibernate.annotations.GenericGenerator;
 
-//basicamente una tabla de la BD 
-
 @Entity
 @Table(name = "paciente")
 public class Paciente{
@@ -23,6 +21,11 @@ public class Paciente{
      @Column(name="id")
      private Long id;
  
+     @Column(name="id_quimio")
+     private Long id_quimio;
+     @Column(name="id_recuperacion")
+     private Long id_recuperacion;
+
      @Column(name = "nombre")
      private String nombre;
      @Column(name = "fecha_de_nacimiento")
@@ -39,8 +42,6 @@ public class Paciente{
      private Timestamp entrada;
      @Column(name = "salida")
      private Timestamp salida;
-     @Column(name = "antecedente")   
-     private String antecedente;
      @Column(name = "prioridad")
      private int prioridad;
      @Column(name = "comentario")
@@ -51,7 +52,9 @@ public class Paciente{
     {
 
     }
-    public Paciente(long id, String nombre, Date fecha_de_nacimiento, Timestamp fecha_de_defuncion, String rut, String programa_de_salud, String diagnostico, Timestamp entrada, Timestamp salida, String antecedente, int prioridad, String comentario){
+    public Paciente(long id, long id_quimio, long id_recuperacion, String nombre, Date fecha_de_nacimiento, Timestamp fecha_de_defuncion, String rut, String programa_de_salud, String diagnostico, Timestamp entrada, Timestamp salida, int prioridad, String comentario){
+        this.id_quimio = id_quimio;
+        this.id_recuperacion = id_recuperacion;
         this.nombre = nombre;
         this.fecha_de_nacimiento = fecha_de_nacimiento;
         this.fecha_de_defuncion = fecha_de_defuncion;
@@ -60,16 +63,25 @@ public class Paciente{
         this.diagnostico = diagnostico;
         this.entrada = entrada;
         this.salida = salida;
-        this.antecedente = antecedente;
         this.prioridad = prioridad;
         this.comentario = comentario;
     }
 
    
-      //Getters
+    //Getters
     public Long getId()
     {
         return id;
+    }
+
+    public Long getId_quimio()
+    {
+        return id_quimio;
+    }
+
+    public Long getId_recuperacion()
+    {
+        return id_recuperacion;
     }
 
     public String getNombre()
@@ -112,11 +124,6 @@ public class Paciente{
         return salida;
     }
 
-    public String getAntecedente()
-    {
-        return antecedente;
-    }
-
     public int getPrioridad()
     {
         return prioridad;
@@ -131,6 +138,16 @@ public class Paciente{
     public void setId(Long id)
     {
         this.id = id;
+    }
+
+    public void setId_quimio(Long id_quimio)
+    {
+        this.id_quimio = id_quimio;
+    }
+
+    public void setId_recuperacion(Long id_recuperacion)
+    {
+        this.id_recuperacion = id_recuperacion;
     }
 
     public void setNombre(String nombre)
@@ -171,11 +188,6 @@ public class Paciente{
     public void setSalida(Timestamp salida)
     {
         this.salida = salida;
-    }
-
-    public void setAntecedente(String antecedente)
-    {
-        this.antecedente = antecedente;
     }
 
     public void setPrioridad(int prioridad)
