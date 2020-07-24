@@ -24,8 +24,21 @@ public class PacienteService{
         }
     }
 
-    public boolean actualizar(Paciente paciente){
+    public boolean actualizarQuimio(Paciente nuevoPaciente, long id){
         try{
+            Paciente paciente = repositorio.findById(id);
+            paciente.setId_quimio(nuevoPaciente.getId_quimio());
+            repositorio.save(paciente);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean actualizarRecuperacion(Paciente nuevoPaciente, long id){
+        try{
+            Paciente paciente = repositorio.findById(id);
+            paciente.setId_recuperacion(nuevoPaciente.getId_recuperacion());
             repositorio.save(paciente);
             return true;
         } catch (Exception e){

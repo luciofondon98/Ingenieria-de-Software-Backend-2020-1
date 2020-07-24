@@ -42,9 +42,14 @@ public class PacienteController{
         return service.getAll();
     }
 
-    @PutMapping("/paciente")
-    public boolean actualizarCliente(@RequestBody @Valid Paciente paciente){
-        return service.actualizar(paciente);
+    @PutMapping("/quimio/{id}")
+    public boolean actualizarQuimio(@PathVariable("id") long id , @RequestBody @Valid Paciente nuevoPaciente){
+        return service.actualizarQuimio(nuevoPaciente,id);
+    }
+
+    @PutMapping("/recuperacion/{id}")
+    public boolean actualizarRecuperacion(@PathVariable("id") long id , @RequestBody @Valid Paciente nuevoPaciente){
+        return service.actualizarRecuperacion(nuevoPaciente,id);
     }
 
     @DeleteMapping("/paciente/{id}")
