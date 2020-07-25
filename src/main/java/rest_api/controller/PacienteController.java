@@ -34,7 +34,17 @@ public class PacienteController{
 
     @GetMapping("/paciente/{id}") // localhost:8000/api/pacientes/paciente/id
     public Paciente obtenerPaciente(@PathVariable("id") long id){
-        return service.obtenerporId(id);
+        return service.obtenerPorId(id);
+    }
+    
+    @GetMapping("/diagnostico/{diagnostico}") // localhost:8000/api/pacientes/diagnostico/diagnostico
+    public List<Paciente> obtenerPacientesPorDiagnostico(@PathVariable("diagnostico") String diagnostico){
+        return service.obtenerPorDiagnostico(diagnostico);
+    }
+
+    @GetMapping("/prioridad/{prioridad}") // localhost:8000/api/pacientes/prioridad/prioridad
+    public List<Paciente> obtenerPacientePorPrioridad(@PathVariable("prioridad") int prioridad){
+        return service.obtenerPorPrioridad(prioridad);
     }
 
     @GetMapping("/getAll") // localhost:8000/api/pacientes/getAll

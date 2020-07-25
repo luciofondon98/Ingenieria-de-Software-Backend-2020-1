@@ -56,11 +56,19 @@ public class PacienteService{
         }
     }
 
-    public Paciente obtenerporId(long id){
+    public Paciente obtenerPorId(long id){
         return repositorio.findById(id);
     }
 
     public List<Paciente> getAll(){
         return repositorio.findAll();
+    }
+
+    public List<Paciente> obtenerPorDiagnostico(String diagnostico){
+        return repositorio.findByDiagnostico(diagnostico);
+    }
+
+    public List<Paciente> obtenerPorPrioridad(int prioridad){
+        return repositorio.findByPrioridad(prioridad);
     }
 }
