@@ -15,7 +15,7 @@ mvn install
 mvn spring-boot:run
 ```
 
-- Nota: se deben editar las siguientes líneas del archivo ```application.properties``` para poder ejecutar
+- Nota: se deben editar las siguientes líneas del archivo ```application.properties``` para poder ejecutar (la base de datos debe llamarse "api")
 
 ```
 #data conection
