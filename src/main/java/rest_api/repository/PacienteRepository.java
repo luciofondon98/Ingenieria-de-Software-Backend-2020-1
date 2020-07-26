@@ -15,6 +15,10 @@ public interface PacienteRepository extends JpaRepository<Paciente, Serializable
 
     public abstract List<Paciente> findAll();
 
+    public abstract Paciente findByRut(String rut);
+
+    public abstract Paciente findByNombre(String nombre);
+    
     public abstract List<Paciente> findByDiagnostico(String diagnostico);
 
     public abstract List<Paciente> findByPrioridad(int prioridad);

@@ -20,6 +20,11 @@ public class PacienteService{
         return paciente;
     }
 
+    public Paciente actualizarPaciente(Paciente nuevoPaciente){
+        repositorio.save(nuevoPaciente);
+        return nuevoPaciente;
+    }
+
     public Paciente actualizarQuimio(Paciente nuevoPaciente, long id){
         Paciente paciente = repositorio.findById(id);
         paciente.setId_quimio(nuevoPaciente.getId_quimio());
@@ -32,7 +37,6 @@ public class PacienteService{
         paciente.setId_recuperacion(nuevoPaciente.getId_recuperacion());
         repositorio.save(paciente);
         return paciente;
-
     }
 
     public Paciente borrar(long id){
@@ -47,6 +51,14 @@ public class PacienteService{
 
     public List<Paciente> getAll(){
         return repositorio.findAll();
+    }
+    
+    public Paciente obtenerPorRut(String rut){
+        return repositorio.findByRut(rut);
+    }
+    
+    public Paciente obtenerPorNombre(String nombre){
+        return repositorio.findByNombre(nombre);
     }
 
     public List<Paciente> obtenerPorDiagnostico(String diagnostico){

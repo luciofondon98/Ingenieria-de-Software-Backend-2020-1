@@ -36,7 +36,17 @@ public class PacienteController{
     public Paciente obtenerPaciente(@PathVariable("id") long id){
         return service.obtenerPorId(id);
     }
+
+    @GetMapping("/paciente/{rut}") // localhost:8000/api/pacientes/paciente/rut
+    public Paciente obtenerPacientePorRut(@PathVariable("rut") String rut){
+        return service.obtenerPorRut(rut);
+    }
     
+    @GetMapping("/paciente/{nombre}") // localhost:8000/api/pacientes/paciente/nombre
+    public Paciente obtenerPacientePorNombre(@PathVariable("nombre") String nombre){
+        return service.obtenerPorNombre(nombre);
+    }
+
     @GetMapping("/diagnostico/{diagnostico}") // localhost:8000/api/pacientes/diagnostico/diagnostico
     public List<Paciente> obtenerPacientesPorDiagnostico(@PathVariable("diagnostico") String diagnostico){
         return service.obtenerPorDiagnostico(diagnostico);
@@ -52,17 +62,22 @@ public class PacienteController{
         return service.getAll();
     }
 
-    @PutMapping("/quimio/{id}")
+    @PutMapping("/paciente/{id}") // localhost:8000/api/pacientes/paciente/id
+    public Paciente actualizarPaciente(@RequestBody @Valid Paciente nuevoPaciente, @PathVariable("id") long id){ // localhost:8000/api/pacientes/paciente/id
+        return service.actualizarPaciente(nuevoPaciente);
+    }
+
+    @PutMapping("/quimio/{id}") // localhost:8000/api/pacientes/quimio/id
     public Paciente actualizarQuimio(@PathVariable("id") long id , @RequestBody @Valid Paciente nuevoPaciente){
         return service.actualizarQuimio(nuevoPaciente,id);
     }
 
-    @PutMapping("/recuperacion/{id}")
-    public Paciente actualizarRecuperacion(@PathVariable("id") long id , @RequestBody @Valid Paciente nuevoPaciente){
+    @PutMapping("/recuperacion/{id}") // localhost:8000/api/pacientes/recuperacion/id
+    public Paciente actualizarRecuperacion(@PathVariable("id") long id, @RequestBody @Valid Paciente nuevoPaciente){
         return service.actualizarRecuperacion(nuevoPaciente,id);
     }
 
-    @DeleteMapping("/paciente/{id}")
+    @DeleteMapping("/paciente/{id}") // localhost:8000/api/pacientes/paciente/id
     public Paciente borrarPaciente(@PathVariable("id") long id){
         return service.borrar(id);
     }
