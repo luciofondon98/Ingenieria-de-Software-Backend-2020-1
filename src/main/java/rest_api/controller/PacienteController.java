@@ -62,8 +62,8 @@ public class PacienteController{
         return service.getAll();
     }
 
-    @PutMapping("/paciente/{id}") // localhost:8000/api/pacientes/paciente/id
-    public Paciente actualizarPaciente(@RequestBody @Valid Paciente nuevoPaciente, @PathVariable("id") long id){ // localhost:8000/api/pacientes/paciente/id
+    @PutMapping("/paciente") // localhost:8000/api/pacientes/paciente/id
+    public Paciente actualizarPaciente(@RequestBody @Valid Paciente nuevoPaciente){ // localhost:8000/api/pacientes/paciente/id
         return service.actualizarPaciente(nuevoPaciente);
     }
 
