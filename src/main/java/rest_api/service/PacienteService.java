@@ -15,45 +15,30 @@ public class PacienteService{
     @Qualifier("RepositoryPaciente")
     private PacienteRepository repositorio;
 
-    public boolean crear(Paciente paciente){
-        try{
-            repositorio.save(paciente);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
+    public Paciente crear(Paciente paciente){
+        repositorio.save(paciente);
+        return paciente;
     }
 
-    public boolean actualizarQuimio(Paciente nuevoPaciente, long id){
-        try{
-            Paciente paciente = repositorio.findById(id);
-            paciente.setId_quimio(nuevoPaciente.getId_quimio());
-            repositorio.save(paciente);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
+    public Paciente actualizarQuimio(Paciente nuevoPaciente, long id){
+        Paciente paciente = repositorio.findById(id);
+        paciente.setId_quimio(nuevoPaciente.getId_quimio());
+        repositorio.save(paciente);
+        return paciente;
     }
 
-    public boolean actualizarRecuperacion(Paciente nuevoPaciente, long id){
-        try{
-            Paciente paciente = repositorio.findById(id);
-            paciente.setId_recuperacion(nuevoPaciente.getId_recuperacion());
-            repositorio.save(paciente);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
+    public Paciente actualizarRecuperacion(Paciente nuevoPaciente, long id){
+        Paciente paciente = repositorio.findById(id);
+        paciente.setId_recuperacion(nuevoPaciente.getId_recuperacion());
+        repositorio.save(paciente);
+        return paciente;
+
     }
 
-    public boolean borrar(long id){
-        try{
-            Paciente paciente = repositorio.findById(id);
-            repositorio.delete(paciente);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
+    public Paciente borrar(long id){
+        Paciente paciente = repositorio.findById(id);
+        repositorio.delete(paciente);
+        return paciente;
     }
 
     public Paciente obtenerPorId(long id){

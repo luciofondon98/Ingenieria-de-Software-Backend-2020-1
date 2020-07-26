@@ -28,7 +28,7 @@ public class PacienteController{
 
 
     @PostMapping("/paciente") // localhost:8000/api/pacientes/paciente
-    public boolean agregarCliente(@RequestBody @Valid Paciente paciente){
+    public Paciente agregarCliente(@RequestBody @Valid Paciente paciente){
         return service.crear(paciente);
     }
 
@@ -53,17 +53,17 @@ public class PacienteController{
     }
 
     @PutMapping("/quimio/{id}")
-    public boolean actualizarQuimio(@PathVariable("id") long id , @RequestBody @Valid Paciente nuevoPaciente){
+    public Paciente actualizarQuimio(@PathVariable("id") long id , @RequestBody @Valid Paciente nuevoPaciente){
         return service.actualizarQuimio(nuevoPaciente,id);
     }
 
     @PutMapping("/recuperacion/{id}")
-    public boolean actualizarRecuperacion(@PathVariable("id") long id , @RequestBody @Valid Paciente nuevoPaciente){
+    public Paciente actualizarRecuperacion(@PathVariable("id") long id , @RequestBody @Valid Paciente nuevoPaciente){
         return service.actualizarRecuperacion(nuevoPaciente,id);
     }
 
     @DeleteMapping("/paciente/{id}")
-    public boolean borrarPaciente(@PathVariable("id") long id){
+    public Paciente borrarPaciente(@PathVariable("id") long id){
         return service.borrar(id);
     }
 }
