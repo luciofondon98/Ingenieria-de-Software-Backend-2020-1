@@ -19,7 +19,8 @@ mvn spring-boot:run
 
 ```
 #data conection
-spring.datasource.url=jdbc:postgresql://localhost:5432/asdf
+spring.datasource.url=jdbc:postgresql://localhost:5432/api
 spring.datasource.username=postgres
 spring.datasource.password=1234
 ```
+
