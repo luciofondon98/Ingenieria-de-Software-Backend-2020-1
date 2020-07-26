@@ -37,12 +37,12 @@ public class PacienteController{
         return service.obtenerPorId(id);
     }
 
-    @GetMapping("/paciente/{rut}") // localhost:8000/api/pacientes/paciente/rut
+    @GetMapping("/rut_paciente/{rut}") // localhost:8000/api/pacientes/paciente/rut
     public Paciente obtenerPacientePorRut(@PathVariable("rut") String rut){
         return service.obtenerPorRut(rut);
     }
     
-    @GetMapping("/paciente/{nombre}") // localhost:8000/api/pacientes/paciente/nombre
+    @GetMapping("/nombre_paciente/{nombre}") // localhost:8000/api/pacientes/paciente/nombre
     public Paciente obtenerPacientePorNombre(@PathVariable("nombre") String nombre){
         return service.obtenerPorNombre(nombre);
     }
