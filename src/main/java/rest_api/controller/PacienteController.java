@@ -21,6 +21,7 @@ import rest_api.service.PacienteService;
 
 @RestController
 @RequestMapping("/api/pacientes")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class PacienteController{
     @Autowired
     @Qualifier("ServicioPaciente")
