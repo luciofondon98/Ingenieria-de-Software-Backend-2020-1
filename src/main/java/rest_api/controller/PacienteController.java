@@ -47,7 +47,7 @@ public class PacienteController{
     }
     
     @GetMapping("/nombre_paciente/{nombre}") // localhost:8000/api/pacientes/paciente/nombre
-    public Paciente obtenerPacientePorNombre(@PathVariable("nombre") String nombre){
+    public List<Paciente> obtenerPacientePorNombre(@PathVariable("nombre") String nombre){
         return service.obtenerPorNombre(nombre);
     }
 

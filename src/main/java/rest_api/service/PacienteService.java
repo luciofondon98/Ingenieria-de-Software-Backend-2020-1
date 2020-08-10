@@ -57,7 +57,7 @@ public class PacienteService{
         return repositorio.findByRut(rut);
     }
     
-    public Paciente obtenerPorNombre(String nombre){
+    public List<Paciente> obtenerPorNombre(String nombre){
         return repositorio.findByNombre(nombre);
     }
 
